@@ -77,6 +77,34 @@ body {
   position: relative;
 }
 
+/* ---------- Brand Name ---------- */
+.brand {
+  position: fixed;
+  top: 28px;
+  left: 36px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brand__name {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: 6px;
+  line-height: 1;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.brand__tagline {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--white-60);
+  letter-spacing: 3px;
+  text-transform: lowercase;
+}
+
 /* ---------- Ambient Background Effects ---------- */
 .ambient-bg {
   position: fixed;
