@@ -168,6 +168,280 @@ body {
   }
 }
 
+/* ---------- Sunny Blob Animation ---------- */
+.sunny-blobs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.sunny-blobs.active {
+  opacity: 1;
+}
+
+.sunny-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+}
+
+.sunny-blob--1 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(255, 220, 80, 0.7) 0%, rgba(255, 180, 50, 0.3) 60%, transparent 100%);
+  top: -5%;
+  right: 10%;
+  animation: sunnyBlobFloat1 8s ease-in-out infinite;
+}
+
+.sunny-blob--2 {
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(255, 170, 50, 0.6) 0%, rgba(255, 140, 30, 0.25) 60%, transparent 100%);
+  top: 15%;
+  left: -5%;
+  animation: sunnyBlobFloat2 10s ease-in-out infinite;
+}
+
+.sunny-blob--3 {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 240, 120, 0.65) 0%, rgba(255, 200, 80, 0.2) 60%, transparent 100%);
+  bottom: 10%;
+  right: -3%;
+  animation: sunnyBlobFloat3 12s ease-in-out infinite;
+}
+
+.sunny-blob--4 {
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(255, 200, 60, 0.5) 0%, rgba(255, 160, 40, 0.15) 60%, transparent 100%);
+  bottom: 20%;
+  left: 15%;
+  animation: sunnyBlobFloat4 9s ease-in-out infinite;
+}
+
+.sunny-blob--5 {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(255, 230, 100, 0.45) 0%, rgba(255, 190, 60, 0.15) 60%, transparent 100%);
+  top: 40%;
+  left: 40%;
+  animation: sunnyBlobFloat5 14s ease-in-out infinite;
+}
+
+/* Sunny light rays */
+.sunny-ray {
+  position: absolute;
+  background: linear-gradient(180deg, rgba(255, 230, 130, 0.4) 0%, transparent 100%);
+  filter: blur(10px);
+  transform-origin: top center;
+}
+
+.sunny-ray--1 {
+  width: 3px;
+  height: 250px;
+  top: 0;
+  left: 20%;
+  transform: rotate(-15deg);
+  animation: rayPulse 4s ease-in-out infinite;
+}
+
+.sunny-ray--2 {
+  width: 2px;
+  height: 300px;
+  top: -20px;
+  right: 25%;
+  transform: rotate(10deg);
+  animation: rayPulse 5s ease-in-out infinite 1s;
+}
+
+.sunny-ray--3 {
+  width: 4px;
+  height: 200px;
+  top: 0;
+  left: 55%;
+  transform: rotate(5deg);
+  animation: rayPulse 6s ease-in-out infinite 2s;
+}
+
+.sunny-ray--4 {
+  width: 2px;
+  height: 280px;
+  top: -10px;
+  right: 45%;
+  transform: rotate(-8deg);
+  animation: rayPulse 4.5s ease-in-out infinite 0.5s;
+}
+
+@keyframes sunnyBlobFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, 30px) scale(1.15); }
+  66% { transform: translate(-20px, 15px) scale(0.9); }
+}
+
+@keyframes sunnyBlobFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -20px) scale(1.1); }
+  50% { transform: translate(50px, 20px) scale(0.95); }
+  75% { transform: translate(10px, -10px) scale(1.05); }
+}
+
+@keyframes sunnyBlobFloat3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(-30px, -25px) scale(1.2); }
+  70% { transform: translate(20px, -10px) scale(0.85); }
+}
+
+@keyframes sunnyBlobFloat4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  30% { transform: translate(25px, 15px) scale(1.1); }
+  60% { transform: translate(-15px, 30px) scale(0.9); }
+}
+
+@keyframes sunnyBlobFloat5 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  20% { transform: translate(-30px, -20px) scale(1.08); }
+  50% { transform: translate(20px, 30px) scale(0.92); }
+  80% { transform: translate(-10px, 10px) scale(1.04); }
+}
+
+@keyframes rayPulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.6; }
+}
+
+/* ---------- Rain Animation ---------- */
+.rain-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.rain-container.active {
+  opacity: 1;
+}
+
+.raindrop {
+  position: absolute;
+  top: -20px;
+  width: 2px;
+  background: linear-gradient(180deg, transparent 0%, rgba(174, 200, 255, 0.6) 50%, rgba(174, 200, 255, 0.9) 100%);
+  border-radius: 0 0 2px 2px;
+  animation: rainFall linear infinite;
+}
+
+.raindrop-splash {
+  position: absolute;
+  bottom: 0;
+  width: 6px;
+  height: 2px;
+  background: rgba(174, 200, 255, 0.4);
+  border-radius: 50%;
+  animation: splash 0.6s ease-out infinite;
+  opacity: 0;
+}
+
+@keyframes rainFall {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes splash {
+  0% {
+    transform: scale(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(3, 1);
+    opacity: 0;
+  }
+}
+
+/* ---------- Snow Animation ---------- */
+.snow-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.snow-container.active {
+  opacity: 1;
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.4) 60%, transparent 100%);
+  border-radius: 50%;
+  filter: blur(0.5px);
+  animation: snowFall linear infinite;
+}
+
+.snowflake--small {
+  width: 4px;
+  height: 4px;
+  filter: blur(0.3px);
+}
+
+.snowflake--large {
+  width: 12px;
+  height: 12px;
+  filter: blur(1px);
+}
+
+@keyframes snowFall {
+  0% {
+    transform: translateY(-10px) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(var(--drift, 30px)) rotate(360deg);
+    opacity: 0;
+  }
+}
+
 /* ---------- Card Container ---------- */
 .card {
   position: relative;

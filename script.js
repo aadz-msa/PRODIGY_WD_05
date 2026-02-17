@@ -25,6 +25,9 @@ const humidityEl  = document.getElementById("humidity");
 const windEl      = document.getElementById("wind");
 const iconGlow    = document.getElementById("iconGlow");
 const ambientBg   = document.getElementById("ambientBg");
+const sunnyBlobs  = document.getElementById("sunnyBlobs");
+const rainContainer = document.getElementById("rainContainer");
+const snowContainer = document.getElementById("snowContainer");
 
 // ── Premium Gradient Themes ──────────────────
 // Enhanced gradients with multiple color stops for depth
@@ -230,7 +233,7 @@ function displayWeather(data) {
   };
 
   // Apply premium gradient based on weather condition
-  applyTheme(condition);
+  applyTheme(condition, temp);
 
   // Toggle visibility with animation
   hideLoader();
@@ -289,8 +292,9 @@ function hideError() {
 /**
  * Applies a complete theme (background, orbs, icon glow) based on weather.
  * @param {string} condition – Weather condition string
+ * @param {number} [temp] – Temperature in Celsius
  */
-function applyTheme(condition) {
+function applyTheme(condition, temp) {
   const theme = 
     gradients[condition] ||
     gradients[Object.keys(gradients).find((k) => condition.includes(k))] ||
@@ -310,6 +314,40 @@ function applyTheme(condition) {
   // Apply icon glow
   if (iconGlow) {
     iconGlow.style.background = theme.iconGlow;
+  }
+
+  // Toggle sunny blob animation
+  if (condition === "clear") {
+    sunnyBlobs.classList.add("active");
+  } else {
+    sunnyBlobs.classList.remove("active");
+  }
+
+  // Toggle rain animation
+  if (condition === "rain" || condition === "drizzle" || condition === "thunderstorm") {
+    createRaindrops();
+    rainContainer.classList.add("active");
+  } else {
+    rainContainer.classList.remove("active");
+    setTimeout(() => {
+      if (!rainContainer.classList.contains("active")) {
+        rainContainer.innerHTML = "";
+      }
+    }, 1000);
+  }
+
+  // Toggle snow animation (also for cold / negative temperatures)
+  const isCold = typeof temp === "number" && temp <= 0;
+  if (condition === "snow" || isCold) {
+    createSnowflakes();
+    snowContainer.classList.add("active");
+  } else {
+    snowContainer.classList.remove("active");
+    setTimeout(() => {
+      if (!snowContainer.classList.contains("active")) {
+        snowContainer.innerHTML = "";
+      }
+    }, 1000);
   }
 }
 
@@ -426,6 +464,62 @@ function animateCounter(element, start, end, duration) {
 }
 
 // ── Initialize ───────────────────────────────
+
+/**
+ * Creates raindrop elements for the rain animation.
+ */
+function createRaindrops() {
+  // Avoid re-creating if already populated
+  if (rainContainer.children.length > 0) return;
+
+  const count = 80;
+  for (let i = 0; i < count; i++) {
+    const drop = document.createElement("div");
+    drop.classList.add("raindrop");
+    drop.style.left = Math.random() * 100 + "%";
+    drop.style.height = Math.random() * 18 + 12 + "px";
+    drop.style.animationDuration = Math.random() * 0.5 + 0.4 + "s";
+    drop.style.animationDelay = Math.random() * 2 + "s";
+    drop.style.opacity = Math.random() * 0.4 + 0.3;
+    rainContainer.appendChild(drop);
+
+    // Some drops get splashes
+    if (Math.random() > 0.6) {
+      const splash = document.createElement("div");
+      splash.classList.add("raindrop-splash");
+      splash.style.left = drop.style.left;
+      splash.style.animationDelay = (parseFloat(drop.style.animationDelay) + parseFloat(drop.style.animationDuration)) + "s";
+      splash.style.animationDuration = "0.6s";
+      rainContainer.appendChild(splash);
+    }
+  }
+}
+
+/**
+ * Creates snowflake elements for the snow animation.
+ */
+function createSnowflakes() {
+  // Avoid re-creating if already populated
+  if (snowContainer.children.length > 0) return;
+
+  const count = 60;
+  for (let i = 0; i < count; i++) {
+    const flake = document.createElement("div");
+    flake.classList.add("snowflake");
+
+    // Vary sizes
+    const sizeRoll = Math.random();
+    if (sizeRoll < 0.3) flake.classList.add("snowflake--small");
+    else if (sizeRoll > 0.85) flake.classList.add("snowflake--large");
+
+    flake.style.left = Math.random() * 100 + "%";
+    flake.style.animationDuration = Math.random() * 5 + 5 + "s";
+    flake.style.animationDelay = Math.random() * 5 + "s";
+    flake.style.setProperty("--drift", (Math.random() * 60 - 30) + "px");
+    flake.style.opacity = Math.random() * 0.5 + 0.4;
+    snowContainer.appendChild(flake);
+  }
+}
 
 // Set initial theme
 applyTheme("default");
