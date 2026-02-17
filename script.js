@@ -78,9 +78,9 @@ const gradients = {
     iconGlow: "rgba(170, 190, 200, 0.5)"
   },
   default: {
-    background: "linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6B73FF 100%)",
-    orbs: ["rgba(255, 255, 255, 0.3)", "rgba(255, 255, 255, 0.2)", "rgba(255, 255, 255, 0.15)"],
-    iconGlow: "rgba(255, 255, 255, 0.5)"
+    background: "linear-gradient(135deg, #0f0c29 0%, #1a1a2e 50%, #16213e 100%)",
+    orbs: ["rgba(30, 40, 80, 0.4)", "rgba(20, 30, 60, 0.3)", "rgba(25, 35, 70, 0.25)"],
+    iconGlow: "rgba(50, 60, 100, 0.5)"
   }
 };
 

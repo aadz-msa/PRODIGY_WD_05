@@ -70,7 +70,7 @@ body {
   justify-content: center;
   align-items: center;
   /* Default gradient – overridden dynamically by JS */
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0f0c29 0%, #1a1a2e 50%, #16213e 100%);
   transition: background var(--transition-gradient);
   padding: 24px;
   overflow-x: hidden;
